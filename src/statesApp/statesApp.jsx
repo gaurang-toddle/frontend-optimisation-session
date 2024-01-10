@@ -24,7 +24,7 @@ function PlaceTree({ place, level = 1 }) {
     };
     return (
         <div style={styles.buttonStyles} onClick={(e) =>handleClick(e,place.id)}>
-            {place.title}
+            <h4>{place.title}</h4>
             {childPlaces.length > 0 && place.id === activeIndex ? (
                 <div style={{ marginLeft: `${level*16}px` }}>
                     {childPlaces.map(place => (
