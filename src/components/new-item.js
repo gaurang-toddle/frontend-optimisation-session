@@ -1,7 +1,6 @@
 import { useState } from "react";
-import ExpensiveComponent from "./expensive";
 
-const NewItem = ({ addItem }) => {
+const NewItem = ({ children, addItem }) => {
   const [newItemName, setNewItemName] = useState('');
   return (
     <>
@@ -38,7 +37,7 @@ const NewItem = ({ addItem }) => {
         
 
       </form>
-      <ExpensiveComponent />
+      {children}
       <div className="px-4 py-2 font-bold text-center bg-blue-400 border border-red-700 animate-pulse">
         ✚ You can add item from above ✚
       </div>

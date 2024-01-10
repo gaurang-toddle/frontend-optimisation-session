@@ -9,6 +9,7 @@ import {
 import Header from './header';
 import ItemList from './item-list';
 import NewItem from './new-item';
+import ExpensiveComponent from './expensive';
 
 const Application = () => {
   const [items, setItems] = useState(getInitialItems());
@@ -33,7 +34,9 @@ const Application = () => {
       <Header items={items} />
       <NewItem
         addItem={add}
-      />
+      >
+        <ExpensiveComponent />
+      </NewItem>
       <section className="flex flex-col gap-8 md:flex-row">
         <ItemList
           title="List of Items"
