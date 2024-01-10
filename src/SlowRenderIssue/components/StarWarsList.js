@@ -4,6 +4,47 @@ import { useStarWars } from "../modules/Module.js";
 import "./StarWarsList.css";
 import { loremIpsum } from "lorem-ipsum";
 
+const RowCells = ({ post, isRowContentVisible = true }) => {
+  return (
+    <>
+      {" "}
+      <td>{isRowContentVisible ? post.title : "-"}</td>
+      <td>
+        {isRowContentVisible
+          ? loremIpsum({
+              count: 1,
+              units: "sentences",
+              sentenceLowerBound: 4,
+              sentenceUpperBound: 8,
+            })
+          : "-"}
+      </td>
+      <td>
+        {isRowContentVisible
+          ? loremIpsum({
+              count: 1,
+              units: "sentences",
+              sentenceLowerBound: 4,
+              sentenceUpperBound: 8,
+            })
+          : "-"}
+      </td>
+      <td>{isRowContentVisible ? <img src={post.thumbnailUrl}></img> : "-"}</td>
+      <td>
+        {isRowContentVisible ? <img src={post.thumbnailUrl}></img> : null}
+      </td>
+    </>
+  );
+};
+
+const Row = ({ post }) => {
+  return (
+    <tr key={post.id}>
+      <RowCells post={post}></RowCells>
+    </tr>
+  );
+};
+
 const StarWarsList = () => {
   const posts = useStarWars();
   console.log({ posts });
@@ -16,6 +57,7 @@ const StarWarsList = () => {
     console.log("Re-render button clicked!");
     setToggleRender((prev) => !prev);
   };
+
   return (
     <div className="container">
       <h1>Posts</h1>
@@ -32,31 +74,7 @@ const StarWarsList = () => {
         </thead>
         <tbody>
           {posts.map((post) => (
-            <tr key={post.id}>
-              <td>{post.title}</td>
-              <td>
-                {loremIpsum({
-                  count: 1,
-                  units: "sentences",
-                  sentenceLowerBound: 4,
-                  sentenceUpperBound: 8,
-                })}
-              </td>
-              <td>
-                {loremIpsum({
-                  count: 1,
-                  units: "sentences",
-                  sentenceLowerBound: 4,
-                  sentenceUpperBound: 8,
-                })}
-              </td>
-              <td>
-                <img src={post.thumbnailUrl}></img>
-              </td>
-              <td>
-                <img src={post.thumbnailUrl}></img>
-              </td>
-            </tr>
+            <Row post={post} key={post.id} />
           ))}
         </tbody>
       </table>
