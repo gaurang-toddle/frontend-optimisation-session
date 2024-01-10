@@ -55,10 +55,10 @@ const StarWarsList = () => {
     // Logic for triggering a re-render (e.g., changing state)
     // This could be a more complex logic based on your requirements
     console.log("Re-render button clicked!");
-    if (page > 1) {
-      setVisiblePosts([]);
-      setPage(1);
-    }
+    // if (page > 1) {
+    //   setVisiblePosts([]);
+    //   setPage(1);
+    // }
     setToggleRender((prev) => !prev);
   };
 
