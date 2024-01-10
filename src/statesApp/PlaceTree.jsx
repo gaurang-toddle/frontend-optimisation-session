@@ -17,9 +17,10 @@ const PlaceTree = ({
   };
 
   // average distance between cities in the same country
-  const averageDistance =
-    level === 3 ? getAverageDistanceBetweenCities(childPlaces) : 0;
-
+  const averageDistance = useMemo(
+    () => (level === 3 ? getAverageDistanceBetweenCities(childPlaces) : 0),
+    [childPlaces, level]
+  );
   return (
     <div style={containerStyle}>
       <div
@@ -55,5 +56,5 @@ const PlaceTree = ({
 };
 PlaceTree.displayName = "PlaceTree";
 
-export default PlaceTree;
-//export default React.memo(PlaceTree);
+//export default PlaceTree;
+export default React.memo(PlaceTree);
