@@ -6,31 +6,20 @@ import { useCallbackRef } from "../modules/useCallbackRef.js";
 import { loremIpsum } from "lorem-ipsum";
 import { observeElementInViewport } from "observe-element-in-viewport";
 
+const DUMMY_TEXT = loremIpsum({
+  count: 1,
+  units: "sentences",
+  sentenceLowerBound: 4,
+  sentenceUpperBound: 8,
+});
+
 const RowCells = ({ post, isRowContentVisible }) => {
   return (
     <>
       {" "}
       <td>{isRowContentVisible ? post.title : "-"}</td>
-      <td>
-        {isRowContentVisible
-          ? loremIpsum({
-              count: 1,
-              units: "sentences",
-              sentenceLowerBound: 4,
-              sentenceUpperBound: 8,
-            })
-          : "-"}
-      </td>
-      <td>
-        {isRowContentVisible
-          ? loremIpsum({
-              count: 1,
-              units: "sentences",
-              sentenceLowerBound: 4,
-              sentenceUpperBound: 8,
-            })
-          : "-"}
-      </td>
+      <td>{isRowContentVisible ? DUMMY_TEXT : "-"}</td>
+      <td>{isRowContentVisible ? DUMMY_TEXT : "-"}</td>
       <td>{isRowContentVisible ? <img src={post.thumbnailUrl}></img> : "-"}</td>
       <td>
         {isRowContentVisible ? <img src={post.thumbnailUrl}></img> : null}
@@ -78,10 +67,14 @@ const Row = ({ post }) => {
 
   return (
     <tr key={post.id} ref={(node) => setRowNodeRef(node)}>
-      <RowCells
-        post={post}
-        isRowContentVisible={isRowContentVisible}
-      ></RowCells>
+      {isRowContentVisible ? (
+        <RowCells
+          post={post}
+          isRowContentVisible={isRowContentVisible}
+        ></RowCells>
+      ) : (
+        <td></td>
+      )}
     </tr>
   );
 };
