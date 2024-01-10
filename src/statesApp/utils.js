@@ -23,7 +23,7 @@ export const getAverageDistanceBetweenCities = (places) => {
 
   // Assume places is an array of objects with latitude and longitude properties
   for (let i = 0; i < places.length; i++) {
-    for (let j = i + 1; j < places.length; j++) {
+    for (let j = 0; j < places.length; j++) {
       const distance = getDistanceInKm({
         lat1: places[i].latitude,
         lon1: places[i].longitude,
