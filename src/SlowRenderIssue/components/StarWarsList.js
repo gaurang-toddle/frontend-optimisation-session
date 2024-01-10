@@ -5,6 +5,45 @@ import "./StarWarsList.css";
 import { loremIpsum } from "lorem-ipsum";
 import { useEffect } from "react";
 
+const RowCells = ({ post, isRowContentVisible = true }) => {
+  return (
+    <>
+      {" "}
+      <td>{post.title}</td>
+      <td>
+        {loremIpsum({
+          count: 1,
+          units: "sentences",
+          sentenceLowerBound: 4,
+          sentenceUpperBound: 8,
+        })}
+      </td>
+      <td>
+        {loremIpsum({
+          count: 1,
+          units: "sentences",
+          sentenceLowerBound: 4,
+          sentenceUpperBound: 8,
+        })}
+      </td>
+      <td>
+        <img src={post.thumbnailUrl}></img>
+      </td>
+      <td>
+        <img src={post.thumbnailUrl}></img>
+      </td>
+    </>
+  );
+};
+
+const Row = ({ post }) => {
+  return (
+    <tr>
+      <RowCells post={post}></RowCells>
+    </tr>
+  );
+};
+
 const StarWarsList = () => {
   const posts = useStarWars();
 
@@ -73,31 +112,7 @@ const StarWarsList = () => {
         </thead>
         <tbody>
           {visiblePosts.map((post) => (
-            <tr key={post.id}>
-              <td>{post.title}</td>
-              <td>
-                {loremIpsum({
-                  count: 1,
-                  units: "sentences",
-                  sentenceLowerBound: 4,
-                  sentenceUpperBound: 8,
-                })}
-              </td>
-              <td>
-                {loremIpsum({
-                  count: 1,
-                  units: "sentences",
-                  sentenceLowerBound: 4,
-                  sentenceUpperBound: 8,
-                })}
-              </td>
-              <td>
-                <img src={post.thumbnailUrl}></img>
-              </td>
-              <td>
-                <img src={post.thumbnailUrl}></img>
-              </td>
-            </tr>
+            <Row post={post} key={post.id} />
           ))}
         </tbody>
       </table>
