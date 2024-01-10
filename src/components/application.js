@@ -13,10 +13,7 @@ import NewItem from './new-item';
 import { setLocalInput } from '../lib/reducer';
 import ExpensiveComponent from './expensive';
 
-const Application = ({
-  newItemName,
-  setNewItemName,
-}) => {
+const Application = () => {
   const [items, setItems] = useState(getInitialItems());
 
   const add = (name) => {
@@ -39,8 +36,6 @@ const Application = ({
       <Header items={items} />
       <ExpensiveComponent />
       <NewItem
-        newItemName={newItemName}
-        setNewItemName={setNewItemName}
         addItem={add}
       />
       <section className="flex flex-col gap-8 md:flex-row">
@@ -55,13 +50,5 @@ const Application = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  newItemName: state.localState.newItemName,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setNewItemName: (value) => dispatch(setLocalInput(value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Application);
+export default Application;
 
