@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
 import {
   createItem,
   filterItems,
@@ -10,8 +9,6 @@ import {
 import Header from './header';
 import ItemList from './item-list';
 import NewItem from './new-item';
-import { setLocalInput } from '../lib/reducer';
-import ExpensiveComponent from './expensive';
 
 const Application = () => {
   const [items, setItems] = useState(getInitialItems());
@@ -34,7 +31,6 @@ const Application = () => {
   return (
     <main className="flex flex-col gap-8 p-8 mx-auto lg:max-w-4xl">
       <Header items={items} />
-      <ExpensiveComponent />
       <NewItem
         addItem={add}
       />
