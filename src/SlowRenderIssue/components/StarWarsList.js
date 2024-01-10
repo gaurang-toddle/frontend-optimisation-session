@@ -12,26 +12,28 @@ const RowCells = ({ post, isRowContentVisible }) => {
       {" "}
       <td>{isRowContentVisible ? post.title : "-"}</td>
       <td>
-        {loremIpsum({
-          count: 1,
-          units: "sentences",
-          sentenceLowerBound: 4,
-          sentenceUpperBound: 8,
-        })}
+        {isRowContentVisible
+          ? loremIpsum({
+              count: 1,
+              units: "sentences",
+              sentenceLowerBound: 4,
+              sentenceUpperBound: 8,
+            })
+          : "-"}
       </td>
       <td>
-        {loremIpsum({
-          count: 1,
-          units: "sentences",
-          sentenceLowerBound: 4,
-          sentenceUpperBound: 8,
-        })}
+        {isRowContentVisible
+          ? loremIpsum({
+              count: 1,
+              units: "sentences",
+              sentenceLowerBound: 4,
+              sentenceUpperBound: 8,
+            })
+          : "-"}
       </td>
+      <td>{isRowContentVisible ? <img src={post.thumbnailUrl}></img> : "-"}</td>
       <td>
-        <img src={post.thumbnailUrl}></img>
-      </td>
-      <td>
-        <img src={post.thumbnailUrl}></img>
+        {isRowContentVisible ? <img src={post.thumbnailUrl}></img> : null}
       </td>
     </>
   );
@@ -41,55 +43,44 @@ const Row = ({ post }) => {
   const [rowNodeRef, setRowNodeRef] = useCallbackRef();
   const [isRowContentVisible, setIsRowContentVisible] = useState(false);
 
-  // useEffect(() => {
-  //   const target = rowNodeRef.current;
-  //   console.log({ target });
-  //   console.log({ target });
+  useEffect(() => {
+    const target = rowNodeRef.current;
 
-  //   if (!target) return;
+    if (!target) return;
 
-  //   // handler for when target is in viewport
-  //   const inHandler = (entry, unobserve, targetEl) => {
-  //     if (!isRowContentVisible) {
-  //       setIsRowContentVisible(true);
-  //     } else {
-  //       // stop observing this row element.
-  //       // because now it's already visible to user
-  //       // comment out this if outHandler is used to hide the element's cell contents
-  //       unobserve();
-  //     }
-  //   };
+    // handler for when target is in viewport
+    const inHandler = (entry, unobserve, targetEl) => {
+      if (!isRowContentVisible) {
+        setIsRowContentVisible(true);
+      } else {
+        unobserve();
+      }
+    };
+    const outHandler = () => {
+      setIsRowContentVisible(false);
+    };
 
-  //   // handler for when target is NOT in viewport
-  //   const outHandler = () => {
-  //     // Default - don't use setting element visiblility to false
-  //     // CPU expensive operation if enabled.
-  //     setIsRowContentVisible(false);
-  //   };
+    const unobserveFn = observeElementInViewport(
+      target,
+      inHandler,
+      outHandler,
+      {
+        viewport: null,
+      }
+    );
 
-  //   // the returned function, when called, stops tracking the target element in the given viewport
-  //   const unobserveFn = observeElementInViewport(
-  //     target,
-  //     inHandler,
-  //     outHandler,
-  //     {
-  //       // set viewport, if null then it's set to window
-  //       viewport: null,
-  //     }
-  //   );
-
-  //   return () => {
-  //     // remove intersection observer from DOM node
-  //     unobserveFn();
-  //     rowNodeRef.current = null;
-  //   };
-  // }, []);
+    return () => {
+      // remove intersection observer from DOM node
+      unobserveFn();
+      rowNodeRef.current = null;
+    };
+  }, [post, rowNodeRef]);
 
   return (
-    <tr key={post.id}>
+    <tr key={post.id} ref={(node) => setRowNodeRef(node)}>
       <RowCells
         post={post}
-        // isRowContentVisible={isRowContentVisible}
+        isRowContentVisible={isRowContentVisible}
       ></RowCells>
     </tr>
   );
@@ -124,7 +115,7 @@ const StarWarsList = () => {
         </thead>
         <tbody>
           {posts.map((post) => (
-            <Row post={post} />
+            <Row post={post} key={post.id} />
           ))}
         </tbody>
       </table>
