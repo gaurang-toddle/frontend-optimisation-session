@@ -34,8 +34,6 @@ const NewItem = ({ children, addItem }) => {
             ➕ Add New Item
           </button>
         </div>
-        
-
       </form>
       {children}
       <div className="px-4 py-2 font-bold text-center bg-blue-400 border border-red-700 animate-pulse">
