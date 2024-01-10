@@ -2,7 +2,6 @@ import { initialTravelPlan } from "./Places";
 import React, { useState, useEffect } from "react";
 import { styles } from "./styles";
 import PlaceTree from "./PlaceTree";
-
 const StatesApp = () => {
   const [plan, setPlan] = useState(initialTravelPlan);
   const [numberOfPeople, setNumberOfPeople] = useState();
@@ -60,6 +59,13 @@ const StatesApp = () => {
             key={place.id}
             place={place}
             level={1}
+            // location={{
+            //   latitude: position.latitude,
+            //   longitude: position.longitude,
+            // }}
+            // containerStyle={{
+            //   paddingTop: "32px"
+            // }}
           />
         ))}
       </ol>
