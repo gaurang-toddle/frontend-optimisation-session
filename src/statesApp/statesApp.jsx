@@ -59,13 +59,10 @@ const StatesApp = () => {
             key={place.id}
             place={place}
             level={1}
-            // location={{
-            //   latitude: position.latitude,
-            //   longitude: position.longitude,
-            // }}
-            // containerStyle={{
-            //   paddingTop: "32px"
-            // }}
+            location={position}
+            containerStyle={{
+              paddingTop: "32px"
+            }}
           />
         ))}
       </ol>

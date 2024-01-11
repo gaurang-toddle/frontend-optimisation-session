@@ -45,6 +45,7 @@ const PlaceTree = ({
                 place={place}
                 level={level + 1}
                 location={location}
+                containerStyle={containerStyle}
               />
             ))}
           </div>
@@ -56,4 +57,4 @@ const PlaceTree = ({
 PlaceTree.displayName = "PlaceTree";
 
 export default PlaceTree;
-//export default React.memo(PlaceTree);
+// export default React.memo(PlaceTree);
