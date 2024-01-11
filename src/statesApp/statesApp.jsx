@@ -1,5 +1,5 @@
 import { initialTravelPlan } from "./Places";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { styles } from "./styles";
 import PlaceTree from "./PlaceTree";
 
@@ -22,6 +22,10 @@ const StatesApp = () => {
     const value = e.target.value;
     setPurposeOfVisit(value);
   };
+
+  const demoMethod = useCallback(() => {
+    return "Any value";
+  }, []);
 
   const [position, setPosition] = useState({ latitude: null, longitude: null });
 
