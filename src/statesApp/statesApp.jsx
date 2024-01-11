@@ -60,9 +60,9 @@ const StatesApp = () => {
             place={place}
             level={1}
             location={position}
-            containerStyle={{
-              paddingTop: "32px"
-            }}
+            // containerStyle={{
+            //   paddingTop: "32px"
+            // }}
           />
         ))}
       </ol>
