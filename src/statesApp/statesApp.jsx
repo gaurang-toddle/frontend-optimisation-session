@@ -23,8 +23,9 @@ const StatesApp = () => {
     setPurposeOfVisit(value);
   };
 
-  const demoMethod = useCallback(() => {
-    return "Any value";
+  const changeTotalDistance = useCallback(() => {
+    const totalDistance = 100;
+    return totalDistance;
   }, []);
 
   const [position, setPosition] = useState({ latitude: null, longitude: null });
@@ -69,6 +70,7 @@ const StatesApp = () => {
             place={place}
             level={1}
             location={position}
+            changeTotalDistance={changeTotalDistance}
             containerStyle={placeTreeContainerStyle}
           />
         ))}
