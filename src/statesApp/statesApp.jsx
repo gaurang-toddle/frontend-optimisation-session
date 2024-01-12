@@ -60,10 +60,10 @@ const StatesApp = () => {
             place={place}
             level={1}
             location={position}
-            changeTotalDistance={() => {
-              const totalDistance = 100;
-              return totalDistance;
-            }}
+            // changeTotalDistance={() => {
+            //   const totalDistance = 100;
+            //   return totalDistance;
+            // }}
             // containerStyle={{
             //   paddingTop: "32px"
             // }}

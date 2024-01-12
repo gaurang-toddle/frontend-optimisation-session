@@ -8,6 +8,7 @@ const PlaceTree = ({
   level = 1,
   location = {},
   containerStyle = {},
+  changeTotalDistance = () => {},
 }) => {
   const childPlaces = place.childPlaces;
   const [activeIndex, setActiveIndex] = useState(-1);
